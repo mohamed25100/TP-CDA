@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>TP CDA INGENIERIE LOGICIELLE 2023-24</title>
+
+</head>
+<body>
+    <div class="schedule" id="schedule">
+        <!-- Course data will be inserted here dynamically -->
+    </div>
+
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const scheduleContainer = document.getElementById('schedule');
+
+                data.forEach(course => {
+                    const courseDiv = document.createElement('div');
+                    courseDiv.classList.add('course');
+
+                    const courseTitle = document.createElement('h2');
+                    courseTitle.textContent = course.title;
+
+                    const courseDescription = document.createElement('p');
+                    courseDescription.textContent = course.description;
+
+                    courseDiv.appendChild(courseTitle);
+                    courseDiv.appendChild(courseDescription);
+
+                    scheduleContainer.appendChild(courseDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
